@@ -77,7 +77,7 @@ export const ACTIONS: ActionData[] = [
     color: Brand.teal,
     title: 'Leave a kind review for a local business you love.',
     desc: 'Five stars and a few genuine sentences can keep a small business alive.',
-    why: 'Independent businesses live or die by word of mouth. A single review can bring in customers they'd never reach otherwise.',
+    why: "Independent businesses live or die by word of mouth. A single review can bring in customers they'd never reach otherwise.",
     ideas: [
       { ic: 'pen', t: 'Write something specific — what made it good?' },
       { ic: 'chat', t: 'Mention a person by name if they helped you' },
@@ -122,8 +122,8 @@ export const ACTIONS: ActionData[] = [
     why: 'Vague offers ("let me know if you need anything") rarely lead to action. Specific offers get accepted 3× more often.',
     ideas: [
       { ic: 'hand', t: 'Carry something heavy, watch their kids, get groceries' },
-      { ic: 'leaf', t: 'Offer to handle a task they've been putting off' },
-      { ic: 'heart', t: 'Introduce yourself if you haven't — sometimes that's the whole thing' },
+      { ic: 'leaf', t: "Offer to handle a task they've been putting off" },
+      { ic: 'heart', t: "Introduce yourself if you haven't — sometimes that's the whole thing" },
     ],
   },
   {
