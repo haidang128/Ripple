@@ -1,11 +1,24 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
-
 import '@/global.css';
 
 import { Platform } from 'react-native';
+
+// Ripple brand palette — matches Design/src/components.jsx T constants
+export const Brand = {
+  blue: '#208AEF',
+  blueDark: '#1B6FBF',
+  blueDeep: '#155CA8',
+  teal: '#00C9A7',
+  orange: '#FF7043',
+  ink: '#1A1A2E',
+  sec: '#6B7280',
+  muted: '#9CA3AF',
+  border: '#E5E7EB',
+  softBg: '#F7F8FC',
+  card: '#FFFFFF',
+  danger: '#EF4444',
+  darkBg: '#0F0F1A',
+  darkCard: '#1E1E2E',
+} as const;
 
 export const Colors = {
   light: {
@@ -28,13 +41,9 @@ export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
 
 export const Fonts = Platform.select({
   ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
     sans: 'system-ui',
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
     serif: 'ui-serif',
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
     rounded: 'ui-rounded',
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
     mono: 'ui-monospace',
   },
   default: {

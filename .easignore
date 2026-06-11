@@ -1,0 +1,6 @@
+.agents/
+.claude/
+Design/
+*.jpg
+*.png.map
+node_modules/
