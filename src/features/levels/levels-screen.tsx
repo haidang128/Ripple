@@ -24,7 +24,7 @@ const LEVELS = [
     threshold: 3,
     description:
       'Every ripple starts with one small act. Seeds are quick, personal gestures — a thank-you, a compliment, a check-in.',
-    examples: ['Thank someone who helped you', 'Give a genuine compliment', 'Check in on someone you've lost touch with', 'Leave a kind review for a local business'],
+    examples: ['Thank someone who helped you', 'Give a genuine compliment', "Check in on someone you've lost touch with", 'Leave a kind review for a local business'],
   },
   {
     id: 'SPARK',
@@ -34,7 +34,7 @@ const LEVELS = [
     range: '3 – 8 actions',
     threshold: 9,
     description:
-      'You're building momentum. Spark actions take a bit more effort and touch more than one person — they create a visible change in your environment.',
+      "You're building momentum. Spark actions take a bit more effort and touch more than one person — they create a visible change in your environment.",
     examples: ['Leave a shared space better than you found it', 'Donate something someone else needs more', 'Help a neighbour with a specific task', 'Teach someone a useful skill'],
   },
   {
@@ -45,7 +45,7 @@ const LEVELS = [
     range: '9+ actions',
     threshold: null,
     description:
-      'You're creating real change. Wave actions ripple outward — they connect communities, unlock new opportunities, and inspire others to act.',
+      "You're creating real change. Wave actions ripple outward — they connect communities, unlock new opportunities, and inspire others to act.",
     examples: ['Give an hour to something bigger than yourself', 'Organise or join a community effort', 'Mentor someone or share expertise', 'Advocate for a cause you care about'],
   },
 ];
