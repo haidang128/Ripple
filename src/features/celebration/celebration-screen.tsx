@@ -163,9 +163,9 @@ function BottomCard({ onShare, onSkip }: BottomCardProps) {
 
       <View style={styles.friendRow}>
         {[0, 1, 2].map(i => (
-          <View key={i} style={styles.friendSlot}>
+          <Pressable key={i} style={styles.friendSlot} onPress={onShare}>
             <PlusIcon />
-          </View>
+          </Pressable>
         ))}
       </View>
 
@@ -266,21 +266,29 @@ export default function CelebrationScreen() {
   }));
 
   const setCompleted = useCompletionStore((s) => s.setCompleted);
+  const [newLevel, setNewLevel] = useState<string | null>(null);
+  const [marked, setMarked] = useState(false);
 
-  const completeAndRoute = (thenShare: boolean) => {
+  // Mark completion exactly once when the screen mounts
+  useEffect(() => {
+    if (marked) return;
     const action = getActionById(actionId ?? '');
-    const newLevel = setCompleted(action?.title ?? '', actionId ?? '', action?.color ?? '', action?.level ?? 'SEED');
-    if (thenShare) {
-      router.push({ pathname: '/share-card', params: { actionId } } as never);
-    } else if (newLevel) {
+    const lvl = setCompleted(action?.title ?? '', actionId ?? '', action?.color ?? '', action?.level ?? 'SEED');
+    setNewLevel(lvl);
+    setMarked(true);
+  }, []);
+
+  const handleShare = () => {
+    router.push({ pathname: '/share-card', params: { actionId } } as never);
+  };
+
+  const handleSkip = () => {
+    if (newLevel) {
       router.replace({ pathname: '/level-up', params: { toLevel: newLevel } } as never);
     } else {
       router.dismissAll();
     }
   };
-
-  const handleShare = () => completeAndRoute(true);
-  const handleSkip = () => completeAndRoute(false);
 
   return (
     <View style={[styles.root, { paddingTop: top }]}>

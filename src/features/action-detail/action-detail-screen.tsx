@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Svg, { Path } from 'react-native-svg';
 import { Brand } from '@/constants/theme';
 import { getActionById } from '@/shared/data/actions';
+import { useCompletionStore } from '@/shared/stores/completion-store';
 
 // ─── Icon ──────────────────────────────────────────────────────
 
@@ -49,6 +50,8 @@ export default function ActionDetailScreen() {
   const { bottom } = useSafeAreaInsets();
 
   const action = getActionById(actionId ?? '') ?? getActionById('thank-someone')!;
+  const { completedToday, completedActionId } = useCompletionStore();
+  const alreadyDone = completedToday && completedActionId === action.id;
 
   const handleDone = () => {
     router.push({ pathname: '/celebration', params: { actionId: action.id } } as never);
@@ -105,14 +108,28 @@ export default function ActionDetailScreen() {
 
         {/* Fixed footer */}
         <View style={[styles.footer, { paddingBottom: bottom + 14 }]}>
-          <Pressable style={styles.primaryBtn} onPress={handleDone}>
-            <Text style={styles.primaryBtnText}>I did it</Text>
-            <CheckIcon />
-          </Pressable>
-          <Text style={styles.hint}>Tap when you've completed this action.</Text>
-          <Pressable onPress={router.back} style={{ alignSelf: 'center', marginTop: 6 }}>
-            <Text style={styles.skipLink}>Not today — remind me tomorrow</Text>
-          </Pressable>
+          {alreadyDone ? (
+            <>
+              <View style={styles.doneBanner}>
+                <CheckIcon />
+                <Text style={styles.doneBannerText}>Completed today</Text>
+              </View>
+              <Pressable onPress={router.back} style={{ alignSelf: 'center', marginTop: 14 }}>
+                <Text style={styles.skipLink}>Close</Text>
+              </Pressable>
+            </>
+          ) : (
+            <>
+              <Pressable style={styles.primaryBtn} onPress={handleDone}>
+                <Text style={styles.primaryBtnText}>I did it</Text>
+                <CheckIcon />
+              </Pressable>
+              <Text style={styles.hint}>Tap when you've completed this action.</Text>
+              <Pressable onPress={router.back} style={{ alignSelf: 'center', marginTop: 6 }}>
+                <Text style={styles.skipLink}>Not today — remind me tomorrow</Text>
+              </Pressable>
+            </>
+          )}
         </View>
       </View>
     </View>
@@ -223,6 +240,22 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: Brand.ink,
     lineHeight: 20,
+  },
+  doneBanner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: Brand.teal + '18',
+    borderWidth: 1.5,
+    borderColor: Brand.teal + '40',
+  },
+  doneBannerText: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: Brand.teal,
   },
   footer: {
     flexShrink: 0,

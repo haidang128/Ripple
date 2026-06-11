@@ -113,6 +113,8 @@ export const useCompletionStore = create<CompletionState>((set, get) => ({
 
   setCompleted: (actionTitle, actionId, color, level) => {
     const prev = get();
+    // Idempotency guard — never count the same day twice
+    if (prev.completedToday) return null;
     const today = todayStr();
     const newCount = prev.completionCount + 1;
     const newLevel = levelFor(newCount);
